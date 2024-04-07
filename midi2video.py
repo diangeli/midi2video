@@ -310,6 +310,7 @@ class Midi2Video(object):
         self.noteFadeIn = config.get('video', 'noteFadeIn', fallback='0')
         self.noteFadeOut = config.get('video', 'noteFadeOut', fallback='0')
         self.fixTrackLength = config.get('preprocess', 'fixTrackLength', fallback='0')
+        self.output_path = 'output'
 
         self.videoDurationMs = 0
         self.videoTotalFrames = 0
@@ -428,7 +429,7 @@ class Midi2Video(object):
         self.generalCmd(cmd, 'concat single frame pics to video')
 
 
-        videoPath = Path("%s/%s.mp4" %( self.scriptPath.resolve(),  self.midiFile.name ) )
+        videoPath = Path("%s/%s/%s.mp4" %( self.scriptPath.resolve(), self.output_path, self.midiFile.name ) )
         if config.get("video", "addAudio") == "1":
             audioWav = Path("%s/audio.wav" % self.tempDir.resolve())
             audioMp3 = Path("%s/audio.mp3" % self.tempDir.resolve())
